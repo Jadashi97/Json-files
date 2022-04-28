@@ -30,17 +30,15 @@ app.post("/", function(req, res){
     const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + unit;
     
     //this function gets the data of the url from someoneelse's(external) server and we see the resonse on node
-    
-    //this function fetches data 
     https.get(url, function(response){
         console.log(response.statusCode);
 
         //this is getting the data inform of a JSON
         response.on("data",(data)=>{
-            const weatherData = JSON.parse(data)
         
             //using JSON to print out some of the weather details and also acces the specific data needed from the object
-            const temperature = weatherData.main.temperature;
+            const weatherData = JSON.parse(data);
+            const temperature = weatherData.main.temp;
             const weatherDescription = weatherData.weather[0].description;
             const iconType = weatherData.weather[0].icon; // used to acces the icon of the weather type
 
@@ -56,6 +54,6 @@ app.post("/", function(req, res){
 });
 
 
-app.listen("3000", function(){
+app.listen("4000", function(){
     console.log(`App is listening on port ${3000}`);
 });
